@@ -21,6 +21,14 @@ public class PlayerShield : MonoBehaviour
     public void SetStats(float setMaxHealth) {
         maxHealth = setMaxHealth;
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        Transform other = collision.collider.transform;
+        if(other.tag == "Enemy") {
+            Damage(other.GetComponent<EnemyAI>().damage);
+            Destroy(other.gameObject);
+        }
+    }
     
     public void Damage(float damage) {
         health -= damage;

@@ -1036,7 +1036,7 @@ GameObject:
   - component: {fileID: 503910722}
   - component: {fileID: 503910721}
   - component: {fileID: 503910720}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: PlayerShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5064,6 +5064,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545148041621577042, guid: 759da7577f869954b861687655224864,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 759da7577f869954b861687655224864, type: 3}
