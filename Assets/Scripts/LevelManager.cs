@@ -40,10 +40,14 @@ public class LevelManager : MonoBehaviour
         }
         return waves;
     }
-    
+
+    // Checks if point is inside level boundaries, set as public vars,
+    // centered about the LevelManager transform
     public bool PointInsideLevel(Vector2 point) {
-        bool insideX = point.x < width/2 && point.x > 0-width/2;
-        bool insideY = point.y < height/2 && point.y > 0-height/2;
+        float x = transform.position.x;
+        float y = transform.position.y;
+        bool insideX = point.x < x + width/2 && point.x > x - width/2;
+        bool insideY = point.y < y + height/2 && point.y > y - height/2;
         return insideX && insideY;
     }
 }

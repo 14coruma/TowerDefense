@@ -55,8 +55,10 @@ public class Player : MonoBehaviour
     void HandleGridCollisions() {
         int maxColliders = 4; // Max number of colliders to sort through
         Collider2D[] colliders = new Collider2D[maxColliders];
-        int numColliders = grid.GetComponent<Collider2D>().OverlapCollider(new ContactFilter2D(), colliders);
-        bool turret = false, wall = false;
+        ContactFilter2D cf = new ContactFilter2D(); // Collide with triggers, like "Start" and "Stop"
+        cf.useTriggers = true;
+        int numColliders = grid.GetComponent<Collider2D>().OverlapCollider(cf, colliders);
+        bool turret = false, wall = false, start = false, stop = false;
         for (int i = 0; i < numColliders; i++) {
             GameObject go = colliders[i].gameObject;
             if (go.tag == "Turret") {
@@ -64,9 +66,14 @@ public class Player : MonoBehaviour
                 selectedTurret = go.transform;
             } else if (go.tag == "Wall") {
                 wall = true;
+            } else if (go.tag == "Start") {
+                start = true;
+            } else if (go.tag == "Stop") {
+                stop = true;
             }
         }
-        bool canBuildHere = !turret && !wall && enemies.NewObstaclePathPossible(grid.position);
+        bool canBuildHere = !turret && !wall && enemies.NewObstaclePathPossible(grid.position)
+            && !start && !stop;
         if (turret) {
             gui.DisableButton("Turret");
             gui.EnableButton("Trash");
