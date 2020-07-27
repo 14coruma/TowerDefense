@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42be1bc1454fa84e9067ce589256106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: {fileID: 0}
+  cost: 15
   range: 3
   damage: 10
   reload: 0.5

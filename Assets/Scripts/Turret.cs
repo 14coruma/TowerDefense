@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret :  Buildable
 {
     public float range = 3f;
     public float damage = 10f;
     public float reload = 0.5f;
-    public int cost = 15;
     bool canAttack = true;
     Enemies enemies;
 

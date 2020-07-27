@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
 {
     Transform target;
     public float speed = 200f;
-    public float damage = 10f; // How much damage enemy applies to PlayerShield
+    public float damage = 10f; // How much damage enemy applies to Shield
     public float nextWaypointDistance = .5f;
     public float maxHealth = 100;
     public float health {get; set;}

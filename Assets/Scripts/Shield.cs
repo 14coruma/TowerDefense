@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShield : MonoBehaviour
+public class Shield : Buildable
 {
     public float maxHealth = 100;
     public float health = 100;

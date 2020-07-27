@@ -8,8 +8,9 @@ public class Player : MonoBehaviour
     int score = 0;
     public Transform gridPrefab;
     public Transform grid;
-    Transform selectedTurret;
+    Transform selected;
     public Transform turretPrefab; // TODO: Temporary, do in menu
+    public Transform shieldPrefab; // TODO: Temporary, do in menu
     Enemies enemies;
     GUI gui;
     LevelManager levelManager;
@@ -23,6 +24,17 @@ public class Player : MonoBehaviour
 
         UpdateMoney();
         UpdateScore();
+    }
+
+    public void BuildShield() {
+        int cost = shieldPrefab.GetComponent<Shield>().cost;
+        if (cost > money) {
+            return;
+        }
+        Transform newShield = Instantiate(shieldPrefab, grid.position, Quaternion.identity);
+        enemies.UpdateGridGraph(newShield.GetComponent<Collider2D>());
+        UpdateMoney(0 - cost);
+        HandleGridCollisions();
     }
 
     /// <summary>
@@ -41,12 +53,12 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Destroys "selectedTurret" at position of the "grid" object
+    /// Destroys "selected" at position of the "grid" object
     /// Called by TrashButton "Click()"
     /// </summary>
-    public void DestroyTurret() {
-        int refund = selectedTurret.GetComponent<Turret>().cost; // TODO: Different refund rate later
-        Destroy(selectedTurret.gameObject);
+    public void DestroyObject() {
+        int refund = selected.GetComponent<Buildable>().cost; // TODO: Different refund rate later
+        Destroy(selected.gameObject);
         AstarPath.active.Scan();
         UpdateMoney(refund);
         HandleGridCollisions();
@@ -58,28 +70,38 @@ public class Player : MonoBehaviour
         ContactFilter2D cf = new ContactFilter2D(); // Collide with triggers, like "Start" and "Stop"
         cf.useTriggers = true;
         int numColliders = grid.GetComponent<Collider2D>().OverlapCollider(cf, colliders);
-        bool turret = false, wall = false, start = false, stop = false;
+        bool turret = false, wall = false, start = false, stop = false, shield = false;
         for (int i = 0; i < numColliders; i++) {
             GameObject go = colliders[i].gameObject;
             if (go.tag == "Turret") {
                 turret = true;
-                selectedTurret = go.transform;
+                selected = go.transform;
             } else if (go.tag == "Wall") {
                 wall = true;
             } else if (go.tag == "Start") {
                 start = true;
             } else if (go.tag == "Stop") {
                 stop = true;
+            } else if (go.tag == "Shield") {
+                shield = true;
+                selected = go.transform;
             }
         }
-        bool canBuildHere = !turret && !wall && enemies.NewObstaclePathPossible(grid.position)
-            && !start && !stop;
-        if (turret) {
+        bool canBuildShield = !turret && !wall && !start && !stop && !shield;
+        bool canBuildTurret = canBuildShield && enemies.NewObstaclePathPossible(grid.position);
+        Debug.Log(enemies.NewObstaclePathPossible(grid.position));
+        if (turret || shield) {
             gui.DisableButton("Turret");
             gui.EnableButton("Trash");
-        } else if (canBuildHere) {
+            gui.DisableButton("Shield");
+        } else if (canBuildShield) {
             gui.DisableButton("Trash");
-            gui.EnableButton("Turret");
+            gui.EnableButton("Shield");
+            if (canBuildTurret) {
+                gui.EnableButton("Turret");
+            } else {
+                gui.DisableButton("Turret");
+            }
         } else {
             gui.DisableButton("Turret");
             gui.DisableButton("Trash");
