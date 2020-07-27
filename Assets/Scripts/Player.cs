@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -89,7 +90,6 @@ public class Player : MonoBehaviour
         }
         bool canBuildShield = !turret && !wall && !start && !stop && !shield;
         bool canBuildTurret = canBuildShield && enemies.NewObstaclePathPossible(grid.position);
-        Debug.Log(enemies.NewObstaclePathPossible(grid.position));
         if (turret || shield) {
             gui.DisableButton("Turret");
             gui.EnableButton("Trash");
@@ -114,6 +114,10 @@ public class Player : MonoBehaviour
         if (!levelManager.PointInsideLevel(clickPos)) {
             return;
         }
+
+        gui.CloseAllPanels();
+
+        // Move selector grid object
         Vector3 clickPos3 = new Vector3(Mathf.Round(clickPos.x), Mathf.Round(clickPos.y), 0f);
         if (clickPos3 != grid.position) {
             Destroy(grid.gameObject);
@@ -132,10 +136,13 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (Input.GetMouseButton(0)) {
-            HandleMouseClick();
+        if (Input.GetMouseButtonDown(0)) {
+            // Don't handle click if GUI elements are overlapping
+            if (!EventSystem.current.IsPointerOverGameObject()) {
+                HandleMouseClick();
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ public class GUI : MonoBehaviour
     public Transform scoreIndicator;
     public List<Transform> buttonsArray; // For editor convenience; to be put in Dictionary 
     Dictionary<string, Transform> buttons;
+    public List<Transform> panelsArray;
+    Dictionary<string, Transform> panels;
 
     public void DrawScore(int score) {
         scoreIndicator.GetComponent<Text>().text = score.ToString();
@@ -26,16 +28,32 @@ public class GUI : MonoBehaviour
         buttons[id].GetComponent<Button>().interactable = true;
     }
 
+    public void CloseAllPanels() {
+        foreach (KeyValuePair<string,Transform> panel in panels) {
+            panel.Value.gameObject.SetActive(false);
+        }
+    }
+
+    public void TogglePanel(string id) {
+        panels[id].gameObject.SetActive(!panels[id].gameObject.activeSelf);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        // Put buttonArray transforms into dictionary (for convenience)
+        // Put transforms into dictionary (for convenience)
         buttons = new Dictionary<string, Transform>();
-        // Naming convention for buttons: "(id)Button"
+        panels = new Dictionary<string, Transform>();
+        // Naming convention: "(id)Type"
         string buttonNamePattern = @"(.+)Button";
+        string panelNamePattern = @"(.+)Panel";
         foreach (Transform button in buttonsArray) {
             Match match = Regex.Match(button.name, buttonNamePattern);
             buttons.Add(match.Groups[1].Value, button);
+        }
+        foreach (Transform panel in panelsArray) {
+            Match match = Regex.Match(panel.name, panelNamePattern);
+            panels.Add(match.Groups[1].Value, panel);
         }
     }
 }
