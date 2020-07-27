@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 211975741}
   - component: {fileID: 211975740}
   m_Layer: 5
-  m_Name: Turret_1Button
+  m_Name: Turret1Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,20 +454,20 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 211975741}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1392240723}
         m_MethodName: BuildTurret
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &211975741
@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 221117650}
   - component: {fileID: 221117649}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: MainPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -696,12 +696,12 @@ GameObject:
   - component: {fileID: 572260078}
   - component: {fileID: 572260077}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: TurretPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &572260076
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1065,7 +1065,7 @@ GameObject:
   - component: {fileID: 695030058}
   - component: {fileID: 695030057}
   m_Layer: 5
-  m_Name: Turret_2Button
+  m_Name: Turret2Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,20 +1128,20 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 695030058}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1392240723}
         m_MethodName: BuildTurret
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &695030058
@@ -1531,15 +1531,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1392240723}
-        m_MethodName: BuildTurret
-        m_Mode: 1
+      - m_Target: {fileID: 2048755602}
+        m_MethodName: TogglePanel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Turret
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &733512850
@@ -1980,8 +1980,10 @@ MonoBehaviour:
   gridPrefab: {fileID: 3194701650383068746, guid: b0c63c9c166191b4ba574014188d1bb3,
     type: 3}
   grid: {fileID: 809339969}
-  turretPrefab: {fileID: 4030177296188660294, guid: 0a94ce9c8e04d0744aca9cc35a7380d3,
-    type: 3}
+  turretIds:
+  - 0
+  - 1
+  - 2
   shieldPrefab: {fileID: 4112865608042666480, guid: d5bc9af8f33d1d549ae60621e926ac14,
     type: 3}
 --- !u!4 &1392240724
@@ -2237,7 +2239,7 @@ GameObject:
   - component: {fileID: 1513214658}
   - component: {fileID: 1513214657}
   m_Layer: 5
-  m_Name: Turret_0Button
+  m_Name: Turret0Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2300,20 +2302,20 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1513214658}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1392240723}
         m_MethodName: BuildTurret
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 0
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1513214658
@@ -2976,6 +2978,8 @@ MonoBehaviour:
   - {fileID: 733512848}
   - {fileID: 727812861}
   - {fileID: 1403518234}
+  panelsArray:
+  - {fileID: 572260076}
 --- !u!4 &2048755603
 Transform:
   m_ObjectHideFlags: 0

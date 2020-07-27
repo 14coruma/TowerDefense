@@ -10,8 +10,9 @@ public class Player : MonoBehaviour
     public Transform gridPrefab;
     public Transform grid;
     Transform selected;
-    public Transform turretPrefab; // TODO: Temporary, do in menu
-    public Transform shieldPrefab; // TODO: Temporary, do in menu
+    public List<string> turretIds;
+    Dictionary<string, Transform> turretPrefabs;
+    public Transform shieldPrefab;
     Enemies enemies;
     GUI gui;
     LevelManager levelManager;
@@ -22,6 +23,10 @@ public class Player : MonoBehaviour
         enemies = GameObject.Find("Enemies").GetComponent<Enemies>();
         gui = GameObject.Find("GUI").GetComponent<GUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        turretPrefabs = new Dictionary<string, Transform>();
+        foreach (string turretId in turretIds) {
+            turretPrefabs.Add(turretId, Resources.Load<GameObject>("Prefabs/Turret" + turretId).transform);
+        }
 
         UpdateMoney();
         UpdateScore();
@@ -42,12 +47,12 @@ public class Player : MonoBehaviour
     /// Builds a turret at position of the "grid" object
     /// Called by TurretButton "Click()"
     /// </summary>
-    public void BuildTurret() {
-        int cost = turretPrefab.GetComponent<Turret>().cost;
+    public void BuildTurret(string typeId) {
+        int cost = turretPrefabs[typeId].GetComponent<Turret>().cost;
         if (cost > money) {
             return;
         }
-        Transform newTurret = Instantiate(turretPrefab, grid.position, Quaternion.identity);
+        Transform newTurret = Instantiate(turretPrefabs[typeId], grid.position, Quaternion.identity);
         enemies.UpdateGridGraph(newTurret.GetComponent<Collider2D>());
         UpdateMoney(0 - cost);
         HandleGridCollisions();
