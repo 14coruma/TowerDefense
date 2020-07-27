@@ -22,10 +22,21 @@ public class GUI : MonoBehaviour
     }
 
     public void DisableButton(string id) {
-        buttons[id].GetComponent<Button>().interactable = false;
+        ClosePanel(id);
+        if (buttons.ContainsKey(id)) {
+            buttons[id].GetComponent<Button>().interactable = false;
+        }
     }
     public void EnableButton(string id) {
-        buttons[id].GetComponent<Button>().interactable = true;
+        if (buttons.ContainsKey(id)) {
+            buttons[id].GetComponent<Button>().interactable = true;
+        }
+    }
+
+    public void ClosePanel(string id) {
+        if (panels.ContainsKey(id)) {
+            panels[id].gameObject.SetActive(false);
+        }
     }
 
     public void CloseAllPanels() {
@@ -35,7 +46,9 @@ public class GUI : MonoBehaviour
     }
 
     public void TogglePanel(string id) {
-        panels[id].gameObject.SetActive(!panels[id].gameObject.activeSelf);
+        if (panels.ContainsKey(id)) {
+            panels[id].gameObject.SetActive(!panels[id].gameObject.activeSelf);
+        }
     }
 
     // Start is called before the first frame update

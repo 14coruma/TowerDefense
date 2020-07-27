@@ -91,9 +91,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7559591294003536024}
   - component: {fileID: 7559591294003536025}
-  - component: {fileID: 7559591294003536028}
   - component: {fileID: 7559591294003536026}
   - component: {fileID: 7559591294003536027}
+  - component: {fileID: 94035249575252216}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -145,22 +145,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &7559591294003536028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559591294003536029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 879c7f7a4478df54bbe1f923938c3433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 200
-  nextWaypointDistance: 0.5
-  maxHealth: 500
-  prize: 5
 --- !u!58 &7559591294003536026
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -198,6 +182,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &94035249575252216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559591294003536029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316f762c67bc8fd44b50079c3cf5f38a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 200
+  damage: 10
+  maxHealth: 100
+  prize: 5
+  nextWaypointDistance: 0.5
 --- !u!1001 &2446954515273980685
 PrefabInstance:
   m_ObjectHideFlags: 0

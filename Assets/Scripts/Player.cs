@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
                 gui.DisableButton("Turret");
             }
         } else {
+            gui.DisableButton("Shield");
             gui.DisableButton("Turret");
             gui.DisableButton("Trash");
         }
