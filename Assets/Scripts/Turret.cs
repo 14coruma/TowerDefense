@@ -7,6 +7,7 @@ public class Turret :  Buildable
     public float range = 3f;
     public float damage = 10f;
     public float reload = 0.5f;
+    public string typeID;
     bool canAttack = true;
     Enemies enemies;
 
@@ -14,6 +15,25 @@ public class Turret :  Buildable
     void Start()
     {
         enemies = GameObject.Find("Enemies").GetComponent<Enemies>();
+        stats = TextFileParser.ParseTextFile("UpgradeText/Turret0");
+        SetStats();
+    }
+
+    void SetStats() {
+        cost = (int) stats[level][0];
+        range = (float) stats[level][1];
+        damage = (float) stats[level][2];
+        reload = (float) stats[level][3];
+    }
+
+    public int Upgrade() {
+        if (level + 1 < stats.Count) {
+            level++;
+            SetStats();
+            return cost;
+        } else {
+            return 0;
+        }
     }
 
     Transform GetTarget() {
@@ -43,7 +63,7 @@ public class Turret :  Buildable
     {
         Transform target = GetTarget();
         // Face the target
-        transform.right = target.position - transform.position;
+        transform.right = (Vector2) target.position - (Vector2) transform.position;
         Attack(target);
     }
 }

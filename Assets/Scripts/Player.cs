@@ -70,6 +70,11 @@ public class Player : MonoBehaviour
         HandleGridCollisions();
     }
 
+    public void UpgradeObject() {
+        int cost = selected.GetComponent<Turret>().Upgrade();
+        UpdateMoney(0-cost);
+    }
+
     void HandleGridCollisions() {
         int maxColliders = 4; // Max number of colliders to sort through
         Collider2D[] colliders = new Collider2D[maxColliders];
@@ -99,9 +104,11 @@ public class Player : MonoBehaviour
             gui.DisableButton("Turret");
             gui.EnableButton("Trash");
             gui.DisableButton("Shield");
+            gui.EnableButton("Upgrade");
         } else if (canBuildShield) {
             gui.DisableButton("Trash");
             gui.EnableButton("Shield");
+            gui.DisableButton("Upgrade");
             if (canBuildTurret) {
                 gui.EnableButton("Turret");
             } else {
@@ -111,6 +118,7 @@ public class Player : MonoBehaviour
             gui.DisableButton("Shield");
             gui.DisableButton("Turret");
             gui.DisableButton("Trash");
+            gui.DisableButton("Upgrade");
         }
     }
 
