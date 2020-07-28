@@ -1432,7 +1432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719696376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 7, z: 0}
+  m_LocalPosition: {x: 4, y: 7, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3068,9 +3068,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 9
   height: 13
-  enemyPrefab: {fileID: 7559591294003536024, guid: 2f2576c7a9a638044bf6907529b44186,
-    type: 3}
-  wavesString: 5,300,5;7,350,10;7,400,15;10,500,15;10,1000,30
+  enemyIds:
+  - 0
+  - 1
+  - 2
   enemyDelay: 1.5
   waveDelay: 20
 --- !u!4 &1885799749
