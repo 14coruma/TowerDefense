@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 211975741}
   - component: {fileID: 211975740}
   m_Layer: 5
-  m_Name: Turret1Button
+  m_Name: TurretFlyingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 1
+          m_StringArgument: Flying
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &211975741
@@ -767,7 +767,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1392240723}
-        m_MethodName: BuildShield
+        m_MethodName: UpgradeObject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1209,7 +1209,7 @@ GameObject:
   - component: {fileID: 695030058}
   - component: {fileID: 695030057}
   m_Layer: 5
-  m_Name: Turret2Button
+  m_Name: TurretTankButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1285,7 +1285,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 2
+          m_StringArgument: Tank
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &695030058
@@ -2125,9 +2125,9 @@ MonoBehaviour:
     type: 3}
   grid: {fileID: 809339969}
   turretIds:
-  - 0
-  - 1
-  - 2
+  - Normal
+  - Tank
+  - Flying
   shieldPrefab: {fileID: 4112865608042666480, guid: d5bc9af8f33d1d549ae60621e926ac14,
     type: 3}
 --- !u!4 &1392240724
@@ -2383,7 +2383,7 @@ GameObject:
   - component: {fileID: 1513214658}
   - component: {fileID: 1513214657}
   m_Layer: 5
-  m_Name: Turret0Button
+  m_Name: TurretNormalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2459,7 +2459,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 0
+          m_StringArgument: Normal
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1513214658
@@ -3069,9 +3069,9 @@ MonoBehaviour:
   width: 9
   height: 13
   enemyIds:
-  - 0
-  - 1
-  - 2
+  - Normal
+  - Flying
+  - Tank
   enemyDelay: 1.5
   waveDelay: 20
 --- !u!4 &1885799749
@@ -3123,6 +3123,7 @@ MonoBehaviour:
   - {fileID: 733512848}
   - {fileID: 727812861}
   - {fileID: 1403518234}
+  - {fileID: 566400975}
   panelsArray:
   - {fileID: 572260076}
 --- !u!4 &2048755603
@@ -3360,6 +3361,16 @@ PrefabInstance:
         type: 3}
       propertyPath: cost
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112865608042666484, guid: d5bc9af8f33d1d549ae60621e926ac14,
+        type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112865608042666484, guid: d5bc9af8f33d1d549ae60621e926ac14,
+        type: 3}
+      propertyPath: health
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bc9af8f33d1d549ae60621e926ac14, type: 3}

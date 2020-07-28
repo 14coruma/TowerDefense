@@ -7,7 +7,7 @@ public class Turret :  Buildable
     public float range = 3f;
     public float damage = 10f;
     public float reload = 0.5f;
-    public string typeID;
+    public string typeId;
     bool canAttack = true;
     Enemies enemies;
 
@@ -15,7 +15,7 @@ public class Turret :  Buildable
     void Start()
     {
         enemies = GameObject.Find("Enemies").GetComponent<Enemies>();
-        stats = TextFileParser.ParseTextFile("UpgradeText/Turret0");
+        stats = TextFileParser.ParseTextFile("UpgradeText/Turret" + typeId);
         SetStats();
     }
 
@@ -37,7 +37,7 @@ public class Turret :  Buildable
     }
 
     Transform GetTarget() {
-        Transform target = enemies.ClosestEnemy(transform.position, range);
+        Transform target = enemies.ClosestEnemy(transform.position, range, typeId);
         // Look at "Start" when no target
         if (target == null) {
             target = GameObject.Find("Start").transform;

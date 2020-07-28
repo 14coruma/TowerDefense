@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Shield : Buildable
 {
-    public float maxHealth = 100;
-    public float health = 100;
+    public int maxHealth = 5;
+    public int health {get; set;} = 5;
     HealthBar healthBar;
 
     // Start is called before the first frame update
@@ -18,23 +18,22 @@ public class Shield : Buildable
         healthBar.UpdateValue(health);
     }
 
-    public void SetStats(float setMaxHealth) {
+    public void SetStats(int setMaxHealth) {
         maxHealth = setMaxHealth;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
         Transform other = collision.collider.transform;
         if(other.tag == "Enemy") {
-            Damage(other.GetComponent<EnemyAI>().damage);
+            Damage();
             Destroy(other.gameObject);
         }
     }
     
-    public void Damage(float damage) {
-        health -= damage;
+    public void Damage() {
+        health--;
         healthBar.UpdateValue(health);
         if (health <= 0) {
-            // TODO: Player loses
             Destroy(gameObject);
         }
     }

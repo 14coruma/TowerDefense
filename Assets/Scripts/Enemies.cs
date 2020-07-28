@@ -35,11 +35,16 @@ public class Enemies : MonoBehaviour
     /// </summary>
     /// <param name="turret">Vector2, the turret's position</param>
     /// <param name="range">float, the turret's range</param>
+    /// <param name="typeId">string, the type of enemy</param>
     /// <returns>null or Transform, of the closest enemy</returns>
-    public Transform ClosestEnemy(Vector2 turret, float range = float.MaxValue) {
+    public Transform ClosestEnemy(Vector2 turret, float range, string typeId = "Normal") {
         float min = float.MaxValue; // Default turret looking at "Start" object
         Transform minTransform = null;
         foreach (Transform enemy in transform) {
+            // "Normal" turrets attack all enemies, but "Flying" and "Tank" must match types
+            if (!enemy.name.Contains(typeId) && typeId != "Normal") {
+                continue;
+            }
             EnemyAI enemyScript = enemy.GetComponent<EnemyAI>();
             float dist2end = enemyScript.distance;
             float dist2turret = Vector2.Distance(enemy.transform.position, turret);
