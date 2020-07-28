@@ -41,8 +41,11 @@ public class Enemies : MonoBehaviour
         float min = float.MaxValue; // Default turret looking at "Start" object
         Transform minTransform = null;
         foreach (Transform enemy in transform) {
-            // "Normal" turrets attack all enemies, but "Flying" and "Tank" must match types
-            if (!enemy.name.Contains(typeId) && typeId != "Normal") {
+            // Turret => Enemy (which turrets attack which enemies)
+            // Normal => Normal,Flying,Tank
+            // Tank => Normal,Tank
+            // Flying => Flying
+            if (!enemy.name.Contains(typeId) && typeId != "Normal" && !(typeId == "Tank" && enemy.name.Contains("Normal"))) {
                 continue;
             }
             EnemyAI enemyScript = enemy.GetComponent<EnemyAI>();
